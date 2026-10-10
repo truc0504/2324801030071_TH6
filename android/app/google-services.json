@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "82926527887",
+    "project_id": "melody-music-th6",
+    "storage_bucket": "melody-music-th6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82926527887:android:f02d6667f2f3210c8c57fa",
+        "android_client_info": {
+          "package_name": "com.example.th6_2324801030071"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBw4YHwrGcptzyitIhLNOa9CXS8cCbs-bc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
