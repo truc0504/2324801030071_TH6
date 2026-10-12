@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -15,6 +16,13 @@ class _AuthScreenState extends State<AuthScreen> {
   bool _register = false;
   bool _busy = false;
   bool _obscure = true;
+  late final Future<void> _googleInitialization;
+
+  @override
+  void initState() {
+    super.initState();
+    _googleInitialization = GoogleSignIn.instance.initialize();
+  }
 
   @override
   void dispose() {
@@ -67,6 +75,51 @@ class _AuthScreenState extends State<AuthScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Không thể kết nối. Vui lòng thử lại.')),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    if (_busy) return;
+    setState(() => _busy = true);
+
+    try {
+      await _googleInitialization;
+      final googleUser = await GoogleSignIn.instance.authenticate();
+      final googleAuth = googleUser.authentication;
+
+      if (googleAuth.idToken == null) {
+        throw StateError('Google không trả về ID token.');
+      }
+
+      final credential = GoogleAuthProvider.credential(
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } on GoogleSignInException catch (e) {
+      if (mounted && e.code != GoogleSignInExceptionCode.canceled) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Không thể đăng nhập Google. Vui lòng thử lại.'),
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_errorMessage(e))),
+        );
+      }
+    } catch (_) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Đăng nhập Google thất bại. Kiểm tra kết nối và cấu hình Firebase.'),
+          ),
         );
       }
     } finally {
@@ -135,6 +188,32 @@ class _AuthScreenState extends State<AuthScreen> {
                         ? const SizedBox(height: 20, width: 20,
                             child: CircularProgressIndicator(strokeWidth: 2))
                         : Text(_register ? 'Đăng ký' : 'Đăng nhập'),
+                  ),
+                  const SizedBox(height: 18),
+                  const Row(
+                    children: [
+                      Expanded(child: Divider(color: Colors.white30)),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('hoặc', style: TextStyle(color: Colors.white60)),
+                      ),
+                      Expanded(child: Divider(color: Colors.white30)),
+                    ],
+                  ),
+                  const SizedBox(height: 18),
+                  OutlinedButton.icon(
+                    onPressed: _busy ? null : _signInWithGoogle,
+                    icon: Image.asset(
+                      'assets/images/google_logo.png',
+                      width: 22,
+                      height: 22,
+                    ),
+                    label: const Text('Tiếp tục với Google'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.white38),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                    ),
                   ),
                   const SizedBox(height: 12),
                   TextButton(
