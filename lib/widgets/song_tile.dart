@@ -8,6 +8,8 @@ class SongTile extends StatelessWidget {
   final bool isPlaying;
   final bool isFavorite;
   final VoidCallback? onFavoritePressed;
+  final VoidCallback? onAddToPlaylist;
+  final VoidCallback? onRemovePressed;
 
   const SongTile({
     super.key,
@@ -16,6 +18,8 @@ class SongTile extends StatelessWidget {
     this.isPlaying = false,
     this.isFavorite = false,
     this.onFavoritePressed,
+    this.onAddToPlaylist,
+    this.onRemovePressed,
   });
 
   @override
@@ -60,27 +64,21 @@ class SongTile extends StatelessWidget {
           song.artist,
           style: const TextStyle(color: Colors.white60),
         ),
-        trailing: onFavoritePressed == null
-            ? Icon(
-                isPlaying
-                    ? Icons.equalizer
-                    : Icons.play_circle_fill,
-                color: const Color(0xFFBB86FC),
-              )
-            : IconButton(
-                tooltip: isFavorite
-                    ? 'Bỏ yêu thích'
-                    : 'Thêm vào playlist',
-                onPressed: onFavoritePressed,
-                icon: Icon(
-                  isFavorite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  color: isFavorite
-                      ? Colors.pinkAccent
-                      : Colors.white70,
-                ),
-              ),
+        trailing: Row(mainAxisSize: MainAxisSize.min, children: [
+          if (onFavoritePressed != null) IconButton(
+            tooltip: isFavorite ? 'Bỏ yêu thích' : 'Thêm vào yêu thích',
+            onPressed: onFavoritePressed,
+            icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.pinkAccent : Colors.white70)),
+          if (onAddToPlaylist != null) IconButton(
+            tooltip: 'Thêm vào Playlist', onPressed: onAddToPlaylist,
+            icon: const Icon(Icons.more_vert)),
+          if (onRemovePressed != null) IconButton(
+            tooltip: 'Xóa khỏi danh sách', onPressed: onRemovePressed,
+            icon: const Icon(Icons.remove_circle_outline)),
+          if (onFavoritePressed == null && onAddToPlaylist == null && onRemovePressed == null)
+            const Icon(Icons.play_circle_fill, color: Color(0xFFBB86FC)),
+        ]),
         onTap: onTap,
       ),
     );

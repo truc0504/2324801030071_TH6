@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   final void Function(Song song) onSongSelected;
   final Set<String> favoriteIds;
   final void Function(Song song) onToggleFavorite;
-  final VoidCallback onSignOut;
+  final VoidCallback? onSignOut;
+  final void Function(Song song) onAddToPlaylist;
 
   const HomeScreen({
     super.key,
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
     required this.favoriteIds,
     required this.onToggleFavorite,
     required this.onSignOut,
+    required this.onAddToPlaylist,
   });
 
   @override
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         actions: [
-          IconButton(
+          if (widget.onSignOut != null) IconButton(
             tooltip: 'Đăng xuất',
             onPressed: widget.onSignOut,
             icon: const Icon(Icons.logout, color: Colors.white70),
@@ -206,6 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onFavoritePressed: () {
                           widget.onToggleFavorite(song);
                         },
+                        onAddToPlaylist: () => widget.onAddToPlaylist(song),
                         onTap: () {
                           FocusScope.of(context).unfocus();
                           widget.onSongSelected(song);
