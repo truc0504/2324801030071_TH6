@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: const Text(
-          'Melody Music',
+          'Tryv Music',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,

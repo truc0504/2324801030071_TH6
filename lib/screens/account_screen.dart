@@ -83,7 +83,7 @@ class _AccountScreenState extends State<AccountScreen> {
       OutlinedButton.icon(onPressed: () async {
         final confirm = await showDialog<bool>(context: context, builder: (dialogContext) => AlertDialog(
           title: const Text('Đăng xuất?'),
-          content: const Text('Bạn muốn đăng xuất khỏi Melody Music? Bạn vẫn có thể nghe nhạc ở chế độ Khách.'),
+          content: const Text('Bạn muốn đăng xuất khỏi Tryv Music? Bạn vẫn có thể nghe nhạc ở chế độ Khách.'),
           actions: [
             TextButton(onPressed: () => Navigator.pop(dialogContext, false), child: const Text('Hủy')),
             FilledButton(onPressed: () => Navigator.pop(dialogContext, true), child: const Text('Đăng xuất')),

@@ -20,16 +20,16 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MelodyMusicApp());
+  runApp(const TryvMusicApp());
 }
 
-class MelodyMusicApp extends StatelessWidget {
-  const MelodyMusicApp({super.key});
+class TryvMusicApp extends StatelessWidget {
+  const TryvMusicApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Melody Music',
+      title: 'Tryv Music',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

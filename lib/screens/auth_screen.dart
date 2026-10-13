@@ -159,7 +159,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 children: [
                   const Icon(Icons.headphones, color: Color(0xFFBB86FC), size: 72),
                   const SizedBox(height: 14),
-                  const Text('Melody Music', textAlign: TextAlign.center,
+                  const Text('Tryv Music', textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 8),
                   Text(_register ? 'Tạo tài khoản mới' : 'Đăng nhập để lưu Playlist cá nhân',
