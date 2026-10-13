@@ -54,7 +54,7 @@ class MiniPlayer extends StatelessWidget {
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return const Icon(
-                    Icons.music_note,
+                    Icons.music_note_rounded,
                     color: Color(0xFFBB86FC),
                     size: 40,
                   );

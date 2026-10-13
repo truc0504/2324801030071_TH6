@@ -157,7 +157,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const Icon(Icons.headphones, color: Color(0xFFBB86FC), size: 72),
+                  const Icon(Icons.music_note_rounded, color: Color(0xFFBB86FC), size: 72),
                   const SizedBox(height: 14),
                   const Text('Tryv Music', textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),

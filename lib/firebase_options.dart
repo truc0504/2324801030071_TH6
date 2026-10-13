@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
     apiKey: 'AIzaSyBw4YHwrGcptzyitIhLNOa9CXS8cCbs-bc',
     appId: '1:82926527887:android:f02d6667f2f3210c8c57fa',
     messagingSenderId: '82926527887',
-    projectId: 'tryv-music-th6',
-    storageBucket: 'tryv-music-th6.firebasestorage.app',
+    projectId: 'melody-music-th6',
+    storageBucket: 'melody-music-th6.firebasestorage.app',
   );
 }

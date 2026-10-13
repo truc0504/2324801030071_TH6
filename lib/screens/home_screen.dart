@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
           const Padding(
             padding: EdgeInsets.only(right: 20),
             child: Icon(
-              Icons.headphones,
+              Icons.music_note_rounded,
               color: Color(0xFFBB86FC),
               size: 28,
             ),
